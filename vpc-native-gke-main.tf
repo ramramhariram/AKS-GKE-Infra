@@ -23,7 +23,6 @@ provider "azurerm" {
 resource "azurerm_resource_group" "hrsrg2" {
   name     = "hrsrg2"
   location = "West US 2"
-  tags = local.common_tags
 }
 
 # Create a virtual network within the resource group
@@ -32,7 +31,6 @@ resource "azurerm_virtual_network" "hrsvnet2" {
   resource_group_name = azurerm_resource_group.hrsrg2.name
   location            = azurerm_resource_group.hrsrg2.location
   address_space       = ["10.67.0.0/16"]
-  tags = local.common_tags
 }
 
 output subnet_id {
@@ -91,7 +89,6 @@ resource "azurerm_kubernetes_cluster" "default" {
     enabled = true
   }
 
-  tags = local.common_tags
 
   provisioner "local-exec" {
     # Load credentials to local environment so subsequent kubectl commands can be run
